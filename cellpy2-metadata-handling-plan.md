@@ -266,6 +266,14 @@ The new cellpy-file is parquet/arrow-based (per the polars port), so:
 action now: ensure `TestMeta.uuid` is **assigned at first load** (uuid4) and preserved
 through save/load/merge, so records are linkable later. Add that to Step 3.
 
+**Update (2026-07-29): a concrete consumer now exists** — *BatBase* (in-house Django +
+PostgreSQL, HTTP API). Full design in
+[cellpy2-metadata-source-integration.md](cellpy2-metadata-source-integration.md): a
+source-agnostic `MetadataSource` **Protocol** + entry-point registry (mirroring the loader
+contract), feeding the resolver's JOURNAL/DB layer; BatBase is the first adapter, HTTP-first
+(GET pull / optional POST push). This is where **`CellMeta.uuid`** (OQ6) and the BattINFO
+vocabulary mapping (OQ4) land. Post-2.2.
+
 ---
 
 ## 4. Test plan (definition of done per step)

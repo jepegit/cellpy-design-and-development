@@ -41,11 +41,15 @@ row on approval). Tracking issue: **to create** (proposed *"cellpy 2.2 (Stage 5)
 | **I** Instruments / IO: Biologic mpr v3 #270, better csv #338, Arbin-db exporter #306, loader robustness **#761** | | per-test `raw_units`; fsspec beyond ssh; **volumetric mode** |
 | **R** Remote paths & discovery: scp SSH-alias regression #687, project-scoped filefinder #691 | | |
 
-**Design-only, post-2.2:** original-vs-processed **data curation & provenance** ([#206](https://github.com/jepegit/cellpy/issues/206))
-— a pristine-raw + serializable-cleaning-recipe subsystem — has its own design
-([cellpy2-data-curation-provenance.md](cellpy2-data-curation-provenance.md)); it couples to
-`c.update()` (Epic L) so it is sequenced **after** L, a 2.4 headline / 2.3-secondary
-candidate. Not in 2.2.
+**Design-only, post-2.2 (captured, not scheduled):**
+- **Data curation & provenance** ([#206](https://github.com/jepegit/cellpy/issues/206)) —
+  pristine-raw + serializable-cleaning-recipe subsystem
+  ([cellpy2-data-curation-provenance.md](cellpy2-data-curation-provenance.md)); couples to
+  `c.update()` (Epic L) → sequenced **after** L (2.4 headline / 2.3-secondary).
+- **External metadata sources** — pluggable `MetadataSource` protocol + adapters (first: the
+  BatBase Django/PostgreSQL HTTP API), realizing metadata-plan Step 7
+  ([cellpy2-metadata-source-integration.md](cellpy2-metadata-source-integration.md)); adds
+  `CellMeta.uuid`, pairs with BattINFO vocab. Adjacent issue #243. 2.3+.
 
 **Cross-repo (F9):** only the **S-epic engine changes** (IR/CCCV/cycle-mode tools) are
 **core-first** (core PR → PyPI → cellpy re-pin). **L needs no new core work** — the
