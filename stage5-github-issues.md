@@ -36,6 +36,12 @@ row on approval). Tracking issue: **to create** (proposed *"cellpy 2.2 (Stage 5)
 | **I** Instruments / IO: Biologic mpr v3 #270, better csv #338, Arbin-db exporter #306, loader robustness **#761** | | per-test `raw_units`; fsspec beyond ssh; **volumetric mode** |
 | **R** Remote paths & discovery: scp SSH-alias regression #687, project-scoped filefinder #691 | | |
 
+**Design-only, post-2.2:** original-vs-processed **data curation & provenance** ([#206](https://github.com/jepegit/cellpy/issues/206))
+— a pristine-raw + serializable-cleaning-recipe subsystem — has its own design
+([cellpy2-data-curation-provenance.md](cellpy2-data-curation-provenance.md)); it couples to
+`c.update()` (Epic L) so it is sequenced **after** L, a 2.4 headline / 2.3-secondary
+candidate. Not in 2.2.
+
 **Cross-repo (F9):** only the **S-epic engine changes** (IR/CCCV/cycle-mode tools) are
 **core-first** (core PR → PyPI → cellpy re-pin). **L needs no new core work** — the
 incremental primitive (`update_data`) already ships, and its loader protocol lives in cellpy
@@ -141,7 +147,8 @@ format change gets the focus it deserves.
 | #303 cycle-statistics · #315 specify summarised values | S | **Optional-additive** S siblings — fold if a contributor picks them up; don't gate 2.2. |
 | #340 plotly plotting too slow | perf | **Separate triage** — a perf investigation, not a 2.2 feature; don't bury it in-scope. |
 | #161 Arbin SQL · #187 Biologic mpt · #238 voltaic | I | Loader coverage; fold near I1/I2 opportunistically. |
-| #318 legacy-Arbin metadata · #206 original vs processed | S / metadata | Metadata-plan adjacent; leave unmilestoned for now. |
+| **#206** original vs processed | own subsystem | **Design captured** ([cellpy2-data-curation-provenance.md](cellpy2-data-curation-provenance.md)); post-2.2, sequenced after Epic L. |
+| #318 legacy-Arbin metadata | metadata | Metadata-plan adjacent; leave unmilestoned for now. |
 | #302 Apache Spark · #243 sqlite dbreader | parked | Spark → narwhals-parking; sqlite dbreader is a larger refactor. |
 
 ## 8. Sequencing (the DAG)
