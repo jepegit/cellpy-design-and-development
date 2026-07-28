@@ -1,8 +1,13 @@
 # Stage 5 — cellpy 2.2 scope plan (issue set)
 
-**Date:** 2026-07-28 · **Status:** 🟢 **scope agreed (maintainer, 2026-07-28).** Decisions
-recorded in §9. Issue set to be cut on go-ahead. 2.1 shipped (v2.1.0 + docs-only
-v2.1.0.post1).
+**Date:** 2026-07-28 (issue set cut 2026-07-29) · **Status:** 🟢 **issue set cut.** Tracking
+[#783](https://github.com/jepegit/cellpy/issues/783); scope decisions in §9. 2.1 shipped
+(v2.1.0 + docs-only v2.1.0.post1).
+
+**Created issue map (2026-07-29):** tracking **#783** · label `cellpy2-stage5` · milestone
+`v.2.2`. **L** L1–L6 → #779/#780/**#164 (L3)**/#781/#782/#778 · **S** S1–S3 → #313/#312/#359 ·
+**I** I1–I4 → #270/#338/#306/#761 · **R** R1–R2 → #687/#691. Deferred: `v.2.3` milestone
+created (#73 GITT/PITT moved there; SPEED-30 to follow).
 
 2.2 is a **minor, additive feature release**, the mirror of 2.1. Where 2.0 "finalized what
 can't be shimmed" and 2.1 "spent the shims", **2.2 delivers the deferred "complete cellpy 2"
@@ -193,6 +198,7 @@ and R1 involve engine contracts, a convention change, or root-cause debugging �
 6. **Reactive stream kept separate:** v2-migration bug reports ship as **`v2.1.x` patches off
    master**, not folded into 2.2; 2.2 scope stays lean to preserve that headroom.
 
-**On go-ahead:** create the *cellpy 2.2 (Stage 5)* tracking issue + a `cellpy2-stage5` label;
-cut L1–L6 / S1–S3 / I1–I4 / R1–R2 wired to the tracker; retarget #761 and #73; and add the
-Stage 5 row to the architecture-plan dashboard. SPEED-30 and GITT/PITT open the 2.3 planning.
+**Done (2026-07-29):** tracking [#783](https://github.com/jepegit/cellpy/issues/783) +
+`cellpy2-stage5` label created; L1–L6 / S1–S3 / I1–I4 / R1–R2 wired to the tracker; #761
+pulled into `v.2.2`; `v.2.3` milestone created with #73 moved there; Stage 5 row added to the
+architecture-plan dashboard. SPEED-30 and GITT/PITT open the 2.3 planning.
