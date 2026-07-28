@@ -1,8 +1,10 @@
 # Plan: the total cellpy 2 architecture (MVP → complete)
 
-**Date:** 2026-07-24 (living document — iterate here; see iteration log at the end)
-**Status:** v4 — Stages 0–2 complete; Stage 3 assembly closed and **v2.0.0rc1**
-shipped; stable `v2.0.0` is the remaining Stage-3 gate ([#574](https://github.com/jepegit/cellpy/issues/574)).
+**Date:** 2026-07-28 (living document — iterate here; see iteration log at the end)
+**Status:** v5 — Stages 0–3 complete; stable **v2.0.0** shipped (2026-07-26). Stage 4
+(**2.1**) essentially complete — Epics A–H merged; only the tracking umbrella
+[#696](https://github.com/jepegit/cellpy/issues/696) and [#345](https://github.com/jepegit/cellpy/issues/345)
+(verify/close) remain on the `v.2.1` milestone.
 Reconciled against the implemented code and the [#438 decision register](stage0-github-issues.md).
 This document *coordinates* the topic plans; it decides nothing they own.
 **How to read this document:** §Status for where we are today → §1–3 for the target
@@ -12,7 +14,7 @@ register → §8 if you are a developer wanting to touch utils or loaders now.
 
 ---
 
-## Status at a glance (updated 2026-07-24)
+## Status at a glance (updated 2026-07-28)
 
 | Stage | Status | Evidence |
 |---|---|---|
@@ -20,16 +22,20 @@ register → §8 if you are a developer wanting to touch utils or loaders now.
 | Stage 1 — v1.x-safe prep | ✅ complete 2026-07-15 | all sub-issues closed (cellpy #446–#458, #479; core#115–#118 shipped as **cellpycore 0.2.0** + re-pin); tracking [#459](https://github.com/jepegit/cellpy/issues/459) closed after §7 delta sign-off; details in [stage1-github-issues.md](stage1-github-issues.md) |
 | Final legacy (v1.x) release | ✅ shipped | v1.1 milestone closed; latest `v1.1.0.post3`; `v1.x` branch carries bugfix-only maintenance (12-month window starts on stable 2.0.0, decision #438-6) |
 | Stage 2 — the flip | ✅ complete 2026-07-18 | flip Stages 0–6 merged (#511, #548–#557); `native_schema` default on; value-parity oracle real; released as **v2.0.0a5** |
-| Stage 3 — 2.0 assembly | 🟡 release gate (2026-07-24) | assembly issues closed (tracking [#575](https://github.com/jepegit/cellpy/issues/575)); scope decision (2 of 4 redesigns in 2.0) in [stage3-github-issues.md](stage3-github-issues.md). Shipped: loader contract + `harmonize()` + tier-1/2 ports + tier-3 decisions (#210, #558–#561), metadata/config/units (#562–#565), ICA + plotting redesigns (#566–#567, #591), CLI/docs/packaging (#568–#573), follow-ons (#580, #594, #651, #654); **cellpycore 0.2.4** re-pin. **Released:** [**v2.0.0rc1**](https://github.com/jepegit/cellpy/releases/tag/v2.0.0rc1). **Open:** [#574](https://github.com/jepegit/cellpy/issues/574) (soak → tag stable `v2.0.0` → conda-forge → close #575). Non-blocking: [#655](https://github.com/jepegit/cellpy/issues/655) test-fixture gaps |
-| Stage 4 — 2.1 | 🟡 planned (2026-07-26) | issue set created on the `v.2.1` milestone (tracking [#696](https://github.com/jepegit/cellpy/issues/696); #697–#721 + folded #164/#345/#655); scope + sequencing in [stage4-github-issues.md](stage4-github-issues.md). Single-release decision (Epic E breaking → no 2.0.x patch split). batch v3 + collectors redesigns, utils waves 3–4 (live/incremental rebuilt on core), F6 menu, shim removals; SPEED-30 + GITT/PITT → 2.2 |
+| Stage 3 — 2.0 assembly | ✅ complete 2026-07-26 | assembly issues closed (tracking [#575](https://github.com/jepegit/cellpy/issues/575) closed); scope decision (2 of 4 redesigns in 2.0) in [stage3-github-issues.md](stage3-github-issues.md). Shipped: loader contract + `harmonize()` + tier-1/2 ports + tier-3 decisions (#210, #558–#561), metadata/config/units (#562–#565), ICA + plotting redesigns (#566–#567, #591), CLI/docs/packaging (#568–#573), follow-ons (#580, #594, #651, #654); **cellpycore 0.2.4** re-pin. **Released:** stable [**v2.0.0**](https://github.com/jepegit/cellpy/releases/tag/v2.0.0) (2026-07-26); release checklist [#574](https://github.com/jepegit/cellpy/issues/574) closed |
+| Stage 4 — 2.1 | ✅ essentially complete (2026-07-28) | `v.2.1` milestone **37 closed / 2 open** (tracking [#696](https://github.com/jepegit/cellpy/issues/696); #697–#721 delivered). Merged: batch v3 (A #697–#704) + collectors redesign (B #705–#708); utils C1 #709 (**C2 #164 live/incremental → 2.2**); F6 menu (D #710–#712); **all shim removals (E1–E5 #713–#717, breaking)**; docs G1–G3 #718–#720; cellpy-core doc-sync H1 #721; test-fixture gaps H2 [#655](https://github.com/jepegit/cellpy/issues/655) **Phase 1 closed** (dead-ref cleanup, loader goldens, bad-file set; Phase 2 dataset curation deferred — surfaced [#761](https://github.com/jepegit/cellpy/issues/761)). Single-release (Epic E breaking → no 2.0.x split). SPEED-30 + GITT/PITT → 2.2. **Remaining:** [#345](https://github.com/jepegit/cellpy/issues/345) (verify/close) + [#696](https://github.com/jepegit/cellpy/issues/696) umbrella (closes at 2.1 tag) |
 
-**Drift check 2026-07-24 (code vs plan): no structural drift.** Stage 3 assembly
-matches the narrowed 2.0 scope (ICA + plotting in; batch/collectors deferred).
+**Drift check 2026-07-28 (code vs plan): no structural drift.** Stage 3 assembly
+matches the narrowed 2.0 scope (ICA + plotting in; batch/collectors deferred to 2.1).
 `readers/cellpy_file/`, `cellpy/config/`, loader `harmonize()` + declarations,
 `cellpy.plotting` as the single plotting home, Typer/`cli_api`, Zensical docs, and
-the file-format compatibility matrix all match their owning plans. Earlier
-planning reconciliations (loader port in Stage 3; tiered GHA benchmark gate #476)
-remain valid. Remaining gap is release process (#574), not architecture.
+the file-format compatibility matrix all match their owning plans. Stage 4 landed
+as planned: `cellpy.batch` + `cellpy.collect` top-level packages (utils.* now
+re-export shims), the 2.0 deprecation shims removed on schedule (Epic E), and the
+prms global shim gone while the `c.mass` property facade was intentionally kept.
+Earlier planning reconciliations (loader port in Stage 3; tiered GHA benchmark gate
+#476) remain valid. No open architectural gap; remaining work is the 2.1 release
+tag itself (umbrella #696) and the #345 verify/close.
 
 ---
 
@@ -637,3 +643,15 @@ work is flip-proof:
   held open on [#574](https://github.com/jepegit/cellpy/issues/574) (soak → stable
   `v2.0.0` → conda-forge); noted non-blocking [#655](https://github.com/jepegit/cellpy/issues/655);
   drift check refreshed (no structural drift — remaining gap is release process).
+- **2026-07-28 (v5)** — status sync after stable **v2.0.0** shipped (2026-07-26,
+  [#574](https://github.com/jepegit/cellpy/issues/574)/[#575](https://github.com/jepegit/cellpy/issues/575)
+  closed) and Stage 4 (**2.1**) landed: dashboard Stage 3 → ✅ complete, Stage 4 →
+  ✅ essentially complete (`v.2.1` milestone 37 closed / 2 open). All Stage-4 epics
+  merged — batch v3 (A) + collectors (B), utils C1 (**C2 #164 live/incremental → 2.2**),
+  F6 menu (D), the breaking shim removals (E1–E5), docs (G1–G3), cellpy-core
+  doc-sync (H1), and test-fixture gaps H2 [#655](https://github.com/jepegit/cellpy/issues/655)
+  Phase 1 (Phase 2 dataset-curation deferred; surfaced loader-robustness
+  [#761](https://github.com/jepegit/cellpy/issues/761)). Drift check refreshed (no
+  structural drift; `cellpy.batch`/`cellpy.collect` packages + shim removals match
+  their plans). Remaining: [#345](https://github.com/jepegit/cellpy/issues/345)
+  verify/close + [#696](https://github.com/jepegit/cellpy/issues/696) umbrella (2.1 tag).
