@@ -1,10 +1,13 @@
 # Plan: the total cellpy 2 architecture (MVP → complete)
 
 **Date:** 2026-07-28 (living document — iterate here; see iteration log at the end)
-**Status:** v5 — Stages 0–3 complete; stable **v2.0.0** shipped (2026-07-26). Stage 4
-(**2.1**) essentially complete — Epics A–H merged; only the tracking umbrella
-[#696](https://github.com/jepegit/cellpy/issues/696) and [#345](https://github.com/jepegit/cellpy/issues/345)
-(verify/close) remain on the `v.2.1` milestone.
+**Status:** v6 — Stages 0–3 complete; stable **v2.0.0** shipped (2026-07-26). Stage 4
+(**2.1**) is **tag-ready** — all Epics A–H merged; the `v.2.1` milestone now holds only
+the tracking umbrella [#696](https://github.com/jepegit/cellpy/issues/696), which closes
+*at* the `v2.1.0` tag. [#345](https://github.com/jepegit/cellpy/issues/345) (batch
+custom-JSON + file search) was split to the **v.2.1.2** patch milestone so it does not
+block the tag; [#164](https://github.com/jepegit/cellpy/issues/164) (live/incremental
+`c.update()`) was deferred to **v.2.2**.
 Reconciled against the implemented code and the [#438 decision register](stage0-github-issues.md).
 This document *coordinates* the topic plans; it decides nothing they own.
 **How to read this document:** §Status for where we are today → §1–3 for the target
@@ -23,7 +26,7 @@ register → §8 if you are a developer wanting to touch utils or loaders now.
 | Final legacy (v1.x) release | ✅ shipped | v1.1 milestone closed; latest `v1.1.0.post3`; `v1.x` branch carries bugfix-only maintenance (12-month window starts on stable 2.0.0, decision #438-6) |
 | Stage 2 — the flip | ✅ complete 2026-07-18 | flip Stages 0–6 merged (#511, #548–#557); `native_schema` default on; value-parity oracle real; released as **v2.0.0a5** |
 | Stage 3 — 2.0 assembly | ✅ complete 2026-07-26 | assembly issues closed (tracking [#575](https://github.com/jepegit/cellpy/issues/575) closed); scope decision (2 of 4 redesigns in 2.0) in [stage3-github-issues.md](stage3-github-issues.md). Shipped: loader contract + `harmonize()` + tier-1/2 ports + tier-3 decisions (#210, #558–#561), metadata/config/units (#562–#565), ICA + plotting redesigns (#566–#567, #591), CLI/docs/packaging (#568–#573), follow-ons (#580, #594, #651, #654); **cellpycore 0.2.4** re-pin. **Released:** stable [**v2.0.0**](https://github.com/jepegit/cellpy/releases/tag/v2.0.0) (2026-07-26); release checklist [#574](https://github.com/jepegit/cellpy/issues/574) closed |
-| Stage 4 — 2.1 | ✅ essentially complete (2026-07-28) | `v.2.1` milestone **37 closed / 2 open** (tracking [#696](https://github.com/jepegit/cellpy/issues/696); #697–#721 delivered). Merged: batch v3 (A #697–#704) + collectors redesign (B #705–#708); utils C1 #709 (**C2 #164 live/incremental → 2.2**); F6 menu (D #710–#712); **all shim removals (E1–E5 #713–#717, breaking)**; docs G1–G3 #718–#720; cellpy-core doc-sync H1 #721; test-fixture gaps H2 [#655](https://github.com/jepegit/cellpy/issues/655) **Phase 1 closed** (dead-ref cleanup, loader goldens, bad-file set; Phase 2 dataset curation deferred — surfaced [#761](https://github.com/jepegit/cellpy/issues/761)). Single-release (Epic E breaking → no 2.0.x split). SPEED-30 + GITT/PITT → 2.2. **Remaining:** [#345](https://github.com/jepegit/cellpy/issues/345) (verify/close) + [#696](https://github.com/jepegit/cellpy/issues/696) umbrella (closes at 2.1 tag) |
+| Stage 4 — 2.1 | ✅ **tag-ready** (2026-07-28) | `v.2.1` milestone **37 closed / 1 open** (only the umbrella [#696](https://github.com/jepegit/cellpy/issues/696), reconciled 2026-07-28; #697–#721 delivered). Merged: batch v3 (A #697–#704) + collectors redesign (B #705–#708); utils C1 #709 (**C2 #164 live/incremental → 2.2**); F6 menu (D #710–#712); **all shim removals (E1–E5 #713–#717, breaking)**; docs G1–G3 #718–#720; cellpy-core doc-sync H1 #721; test-fixture gaps H2 [#655](https://github.com/jepegit/cellpy/issues/655) **Phase 1 closed** (dead-ref cleanup, loader goldens, bad-file set; Phase 2 dataset curation deferred — surfaced [#761](https://github.com/jepegit/cellpy/issues/761)). Single-release (Epic E breaking → no 2.0.x split). SPEED-30 + GITT/PITT → 2.2. **Remaining:** tag `v2.1.0` from clean `master` (setuptools-scm ⇒ the tag *is* the version bump) → PyPI + GitHub release → conda-forge feedstock bump → close [#696](https://github.com/jepegit/cellpy/issues/696). [#345](https://github.com/jepegit/cellpy/issues/345) split to **v.2.1.2** patch; does not gate the tag |
 
 **Drift check 2026-07-28 (code vs plan): no structural drift.** Stage 3 assembly
 matches the narrowed 2.0 scope (ICA + plotting in; batch/collectors deferred to 2.1).
@@ -34,8 +37,9 @@ as planned: `cellpy.batch` + `cellpy.collect` top-level packages (utils.* now
 re-export shims), the 2.0 deprecation shims removed on schedule (Epic E), and the
 prms global shim gone while the `c.mass` property facade was intentionally kept.
 Earlier planning reconciliations (loader port in Stage 3; tiered GHA benchmark gate
-#476) remain valid. No open architectural gap; remaining work is the 2.1 release
-tag itself (umbrella #696) and the #345 verify/close.
+#476) remain valid. No open architectural gap; the only remaining work is the 2.1
+release tag itself (umbrella #696, which closes at the tag). #345 is out of the tag's
+path on the v.2.1.2 patch milestone, #164 on v.2.2.
 
 ---
 
@@ -655,3 +659,12 @@ work is flip-proof:
   structural drift; `cellpy.batch`/`cellpy.collect` packages + shim removals match
   their plans). Remaining: [#345](https://github.com/jepegit/cellpy/issues/345)
   verify/close + [#696](https://github.com/jepegit/cellpy/issues/696) umbrella (2.1 tag).
+- **2026-07-28 (v6)** — 2.1 close-out prep: [#345](https://github.com/jepegit/cellpy/issues/345)
+  (found to be a real batch custom-JSON + file-search enhancement, not a verify/close)
+  split to a new **v.2.1.2** patch milestone so it does not gate the tag;
+  [#164](https://github.com/jepegit/cellpy/issues/164) live/incremental confirmed on
+  **v.2.2**. The [#696](https://github.com/jepegit/cellpy/issues/696) umbrella checklist
+  reconciled — every sub-issue closed except #164 — leaving the `v.2.1` milestone with
+  the umbrella alone. Stage 4 marked **tag-ready**: the remaining path is `git tag
+  v2.1.0` from clean `master` (setuptools-scm ⇒ tag = version) → PyPI + GitHub release →
+  conda-forge feedstock bump → close #696. No structural drift.
