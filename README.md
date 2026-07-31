@@ -1,14 +1,16 @@
-# architecture-plan
+# cellpy-design-and-development
 
 Authoritative **cellpy 2 architecture and migration plans** for the
 `cellpy-workspace` multi-repo checkout.
+
+Formerly **`architecture-plan`** (GitHub + local folder renamed 2026-07-31).
 
 **Agents / humans: start at [`CURRENT.md`](CURRENT.md).**
 
 ## Layout
 
 ```text
-architecture-plan/
+cellpy-design-and-development/
 ├── CURRENT.md              ← what we’re working through now
 ├── PATHS.md                ← basename → current path (historical links)
 ├── README.md               ← this file
@@ -35,16 +37,17 @@ architecture-plan/
 |---|---|
 | `../cellpy/` | Consumer library; issue-flow under `.issueflows/` |
 | `../cellpy-core/` | Compute engine |
-| `architecture-plan/` (this repo) | Plan documents |
+| `cellpy-design-and-development/` (this repo) | Plan documents |
+| `../cellpy-examples/` | Example notebooks/scripts |
 
-Canonical remote: [`cellpy/architecture-plan`](https://github.com/cellpy/architecture-plan).
-Cloud mirror: [`jepegit/architecture-plan`](https://github.com/jepegit/architecture-plan).
+Canonical remote: [`cellpy/cellpy-design-and-development`](https://github.com/cellpy/cellpy-design-and-development).
+Cloud mirror: [`jepegit/cellpy-design-and-development`](https://github.com/jepegit/cellpy-design-and-development).
 
 ## Note for agents
 
-Plans **used to** live under a `code-reviews/` folder in the workspace, then as a
-flat list in this repo. Prefer **`CURRENT.md`** and the folders above; if you only
-have a basename (`cellpy2-….md`), look it up in [`PATHS.md`](PATHS.md).
+Plans **used to** live under a `code-reviews/` folder in the workspace, then in a
+repo named `architecture-plan`. Prefer **`CURRENT.md`** and the folders above; if
+you only have a basename (`cellpy2-….md`), look it up in [`PATHS.md`](PATHS.md).
 
 Cross-reference in cellpy:
 `cellpy/.issueflows/04-designs-and-guides/cellpy-workspace-repos.md`.
