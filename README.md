@@ -39,7 +39,7 @@ cellpy-design-and-development/
 | `../cellpy-core/` | Compute engine |
 | `cellpy-design-and-development/` (this repo) | Plan documents |
 | `../cellpy-examples/` | Example notebooks/scripts |
-| `../cellpy-simple-gui/` | Desktop explorer app (FastAPI + pywebview) |
+| `../cellpy-simple-gui/` | Desktop explorer (FastAPI + pywebview); dogfood app for API pain points & inspiration → cellpy |
 
 Canonical remote: [`cellpy/cellpy-design-and-development`](https://github.com/cellpy/cellpy-design-and-development).
 Cloud mirror: [`jepegit/cellpy-design-and-development`](https://github.com/jepegit/cellpy-design-and-development).

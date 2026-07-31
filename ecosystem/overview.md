@@ -33,8 +33,14 @@ metadata population, persistence, plotting, batch, CLI.
 
 | Checkout | Role |
 |---|---|
-| **cellpy-simple-gui** (`cellpy/cellpy-simple-gui`) | Desktop explorer (FastAPI + pywebview) consuming cellpy ≥ 2.1 — import, journal, collect/plot, project save |
+| **cellpy-simple-gui** (`cellpy/cellpy-simple-gui`) | Desktop explorer (FastAPI + pywebview) on cellpy ≥ 2.1 — and a **dogfood / discovery** vehicle for the library |
 | **cellpy-examples** (`cellpy/cellpy-examples`) | Tutorial notebooks/scripts |
+
+**`cellpy-simple-gui` is not only a product demo.** It exercises real researcher
+workflows (import raw → journal/metadata → collect/plot → project save) so we can
+**surface API pain points, missing conveniences, and UX-driven feature ideas** that
+should feed back into `cellpy` (and sometimes Stage plans). Treat friction found
+there as design input, not just app bugs.
 
 These sit *above* cellpy; they do not own schemas or the compute engine.
 
