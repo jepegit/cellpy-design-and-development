@@ -40,7 +40,8 @@ metadata population, persistence, plotting, batch, CLI.
 workflows (import raw → journal/metadata → collect/plot → project save) so we can
 **surface API pain points, missing conveniences, and UX-driven feature ideas** that
 should feed back into `cellpy` (and sometimes Stage plans). Treat friction found
-there as design input, not just app bugs.
+there as design input, not just app bugs. Capture candidates in
+[`wishlist.md`](wishlist.md) until they are promoted to issues / Stage work.
 
 These sit *above* cellpy; they do not own schemas or the compute engine.
 

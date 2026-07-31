@@ -26,6 +26,7 @@ cellpy-design-and-development/
 | [`CURRENT.md`](CURRENT.md) | Active stage, open epics, links into active plans |
 | [`PATHS.md`](PATHS.md) | Old flat filename → where it lives now |
 | [`ecosystem/`](ecosystem/) | cellpy vs cellpy-core roles, module layout, conventions |
+| [`ecosystem/wishlist.md`](ecosystem/wishlist.md) | Possible extensions / dogfood ideas (not yet staged) |
 | [`roadmap/`](roadmap/) | Stage dashboard, gap analysis, stage issue sets |
 | [`active/`](active/) | Designs still constraining open / near-term work |
 | [`archive/`](archive/) | Finished topic plans (provenance) |

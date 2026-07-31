@@ -69,4 +69,5 @@ SPEED-30 versioned headers · GITT/PITT [#73](https://github.com/jepegit/cellpy/
 | Executed topic plans | [archive/](archive/) |
 | Evidence / scans | [research/](research/) |
 | Package layout & conventions | [ecosystem/](ecosystem/) |
+| Extensions / wishlist (unscheduled) | [ecosystem/wishlist.md](ecosystem/wishlist.md) |
 | Old basename → new path | [PATHS.md](PATHS.md) |
