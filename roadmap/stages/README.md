@@ -11,4 +11,4 @@ Point-in-time records of GitHub issues cut for each cellpy 2 stage.
 | 2 | the flip | ✅ complete | *(no separate issue-set file; see coordinator)* |
 | 3 | 2.0 assembly | ✅ complete → v2.0.0 | [stage3-github-issues.md](stage3-github-issues.md) |
 | 4 | 2.1 | ✅ shipped → v2.1.0 | [stage4-github-issues.md](stage4-github-issues.md) |
-| 5 | 2.2 | 🟡 current | [stage5-github-issues.md](stage5-github-issues.md) |
+| 5 | 2.2 | 🟡 issue set cut; execution not started (sync 2026-07-31) | [stage5-github-issues.md](stage5-github-issues.md) |

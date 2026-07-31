@@ -1,8 +1,9 @@
 # Stage 5 — cellpy 2.2 scope plan (issue set)
 
-**Date:** 2026-07-28 (issue set cut 2026-07-29) · **Status:** 🟢 **issue set cut.** Tracking
-[#783](https://github.com/jepegit/cellpy/issues/783); scope decisions in §9. 2.1 shipped
-(v2.1.0 + docs-only v2.1.0.post1).
+**Date:** 2026-07-28 (issue set cut 2026-07-29) · **Status sync:** 2026-07-31 ·
+**Status:** 🟡 **issue set cut; execution not started** (0 Stage 5 epic issues closed).
+Tracking [#783](https://github.com/jepegit/cellpy/issues/783); scope decisions in §9.
+2.1 shipped (v2.1.0 + post1); reactive patch stream through **v2.1.1.post3** (see §10).
 
 **Created issue map (2026-07-29):** tracking **#783** · label `cellpy2-stage5` · milestone
 `v.2.2`. **L** L1–L6 → #779/#780/**#164 (L3)**/#781/#782/#778 · **S** S1–S3 → #313/#312/#359 ·
@@ -24,11 +25,15 @@ the 2.2 feature line. 2.2 scope is therefore held **lean on purpose**, so the fe
 can absorb slippage and the team keeps headroom for urgent fixes. If an incoming migration
 issue turns out to be a feature rather than a bug, it joins 2.2 explicitly; bugs do not.
 
-Coordinating doc: [cellpy2-architecture-plan.md](../cellpy2-architecture-plan.md) (add a Stage 5
-row on approval). Tracking issue: **to create** (proposed *"cellpy 2.2 (Stage 5) — tracking"*).
+Coordinating doc: [cellpy2-architecture-plan.md](../cellpy2-architecture-plan.md).
+Tracking: **[#783](https://github.com/jepegit/cellpy/issues/783)** (*cellpy 2.2 (Stage 5) — tracking*).
+Day-to-day: [`../../CURRENT.md`](../../CURRENT.md).
 
-**Milestone today (`v.2.2`, 10 open):** #164, #73, #313, #312, #359, #270, #338, #306,
-#687, #691. Net effect of the decisions below: **#73 → 2.3**, **#761 → pulled into 2.2**.
+**Milestone `v.2.2` (2026-07-31: 18 open / 0 closed):** original set
+#778/#779/#780/#164/#781/#782 · #313/#312/#359 · #270/#338/#306/#761 · #687/#691 ·
+tracking #783 — plus milestone adds **#784** (external metadata sources) and
+**#352** (initial-OCV batch plot). Net of the decisions below: **#73 → 2.3**,
+**#761 → pulled into 2.2**.
 
 ---
 
@@ -205,4 +210,22 @@ and R1 involve engine contracts, a convention change, or root-cause debugging �
 **Done (2026-07-29):** tracking [#783](https://github.com/jepegit/cellpy/issues/783) +
 `cellpy2-stage5` label created; L1–L6 / S1–S3 / I1–I4 / R1–R2 wired to the tracker; #761
 pulled into `v.2.2`; `v.2.3` milestone created with #73 moved there; Stage 5 row added to the
-architecture-plan dashboard. SPEED-30 and GITT/PITT open the 2.3 planning.
+architecture dashboard. SPEED-30 and GITT/PITT open the 2.3 planning.
+
+---
+
+## 10. Progress (updated 2026-07-31)
+
+| Epic / item | Status | Evidence |
+|---|---|---|
+| **L** Live / incremental (#778→#164→#782) | ⬜ not started | all open; no open PRs |
+| **S** Step/summary science (#313/#312/#359) | ⬜ not started | all open; no core PRs for these |
+| **I** Instruments / IO (#270/#338/#306/#761) | ⬜ not started | all open |
+| **R** Remote / discovery (#687/#691) | ⬜ not started | all open |
+| **#784** MetadataSource | ⬜ open (design ready) | on `v.2.2`; design in [`active/cellpy2-metadata-source-integration.md`](../../active/cellpy2-metadata-source-integration.md) |
+| **#352** initial OCV batch plot | ⬜ open | opportunistic add to `v.2.2` |
+| **Reactive `v2.1.x` stream** | 🟢 shipping | **v2.1.1** … **v2.1.1.post3** (collect/plot app work); `v.2.1.2` still open (#345/#799/#800) |
+| Tracking #783 | open | checklist unchanged (all `[ ]`) |
+
+**Startable now** (unchanged from §8): L6 (#778), S-oracle characterization, I1 (#270),
+I3 (#306), I4 (#761), R1 (#687).
