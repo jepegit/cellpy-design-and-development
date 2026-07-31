@@ -29,6 +29,15 @@ metadata population, persistence, plotting, batch, CLI.
 | **cellpycore** (`cellpy/cellpy-core`) | Schemas (`Cols` / `RawCols`), step & summary engines, curve extractors, unit converters, metadata *models/scaffolding*, legacy header mapping, merge/update primitives | Instrument I/O, user config, populated experiment metadata, plotting, batch orchestration, CLI |
 | **cellpy** (`jepegit/cellpy`) | Instrument loaders + `harmonize()`, config/secrets, attaching real metadata, `.cellpy` file I/O, plotting, batch/collect, utils, Typer CLI | Reimplementing step/summary math |
 
+## Downstream apps (same workspace)
+
+| Checkout | Role |
+|---|---|
+| **cellpy-simple-gui** (`cellpy/cellpy-simple-gui`) | Desktop explorer (FastAPI + pywebview) consuming cellpy ≥ 2.1 — import, journal, collect/plot, project save |
+| **cellpy-examples** (`cellpy/cellpy-examples`) | Tutorial notebooks/scripts |
+
+These sit *above* cellpy; they do not own schemas or the compute engine.
+
 ## Layering
 
 ```text
