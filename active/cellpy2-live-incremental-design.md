@@ -1,6 +1,6 @@
 # Live / incremental refresh — design (C2, #164) → 2.2
 
-Status: **design only** (2026-07-27). Deferred out of 2.1 execution; targets **2.2**.
+Status: **design only** (2026-07-27; **substrate re-checked 2026-09-08**, see §2a). Deferred out of 2.1 execution; targets **2.2**.
 Owning issue: [#164](https://github.com/jepegit/cellpy/issues/164) "Allow for `c.update()`".
 Context: [utils plan wave 4 / G10](../archive/redesigns/cellpy2-utils-migration-plan.md), architecture
 plan [§5.6](../roadmap/cellpy2-architecture-plan.md) (the optional `SupportsIncrementalLoad`
@@ -44,6 +44,21 @@ plus a batch-level live refresh (`b.update(live=True)` / a poll loop).
 3. `utils/live.py` (10-line `warnings.warn("to be implemented")` stub) and
    `utils/processor.py` (a hard-coded-path `__main__` benchmark scratch) are
    **not real implementations** — nothing to "rebuild," they are green-field.
+
+## 2a. What the `v2.1.x` patch stream added (checked 2026-09-08)
+
+Still true as of v2.1.3.post3: no `load_since`, no `CellpyCell.update()`, `live.py` and
+`processor.py` unchanged. But the app-side pieces §4–§6 lean on have moved:
+
+| Now exists | Use in this design |
+|---|---|
+| `SourcePreference.NEWEST` + `CellpyCell.check_file_ids(rawfiles, cellpyfile)` (#825) | §4 step 1 change-detect = this FileID size+mtime check; do not add a parallel mechanism |
+| `CellpyCell.refresh_after(fields)` + `SUMMARY_META_DEPENDENCIES` (#846) | §4 step 3 "app-side derived refresh" — extend this hook rather than adding a second refresh path |
+| Orchestrated `batch.load` → `Batch.update()` with `force_recalc`, progress callbacks / tqdm (#822, #825, #916), `executor="processes"` persist fixed (#920) | §6 `b.update(live=True)` / `b.poll()` = a loop over `Batch.update()` + the existing runner; the tick UI uses the existing `on_progress` callback |
+| Journal JSON `version` field, missing = 1 (#1000) | If per-cell load markers are persisted in the journal (batch-level poll state), that is the first bump to journal **v2** — mechanism ready |
+| Atomic `.cellpy` writes (#845) | A poll loop saving each tick cannot corrupt the file mid-write |
+| `batch_tools/batch_core.py` **deleted**; `batch/store.py` uses `removeprefix` | §5 lstrip fix is **obsolete** |
+| Consumers: `cellpy-simple-gui` (desktop) and `cellpy-mcp` (agent tools, #840) | Both want "has the test grown → refresh" without a batch: ship `c.update() -> bool` (L3) as a callable surface before L5 |
 
 ## 3. The missing protocol — `SupportsIncrementalLoad`
 
@@ -110,12 +125,9 @@ into the cellpy file so `update()` survives a save/load round-trip).
   `executor="threads"` path (which already exists post-A) and **delete**
   `processor.py`, or keep a documented thin wrapper. Recommendation: delete —
   `batch.runner` already owns parallel load.
-- **Fix the label-mangling bug when the live/batch refresh path is touched:**
-  `batch_tools/batch_core.py:180` uses `accessor_label.lstrip(self.accessor_pre)`.
-  `str.lstrip(chars)` strips a *character set*, not a prefix — `"xenon_cell"` with
-  an `x`-containing `accessor_pre` becomes `"enon_cell"`. Replace with
-  `removeprefix(self.accessor_pre)`. (Independent of core; can also be a standalone
-  fix.)
+- ~~Fix the label-mangling bug (`batch_core.py:180` `lstrip` → `removeprefix`)~~ —
+  **done / obsolete (2026-09-08):** `batch_tools/batch_core.py` no longer exists and
+  `batch/store.py` documents the `removeprefix` fix.
 
 ## 6. Batch live-refresh
 
@@ -127,10 +139,10 @@ collectors/report on each tick. Rides entirely on §4 — no new core needs.
 
 | # | Where | Item |
 |---|---|---|
-| 1 | cellpycore | `SupportsIncrementalLoad` protocol + `LoadMarker`/`IncrementalChunk` types (or host the protocol in cellpy if it stays app-only) |
+| 1 | **cellpy** (decided, stage5 §2) | `SupportsIncrementalLoad` protocol + `LoadMarker`/`IncrementalChunk` types — cellpy-hosted; core never sees it |
 | 2 | cellpy loaders | Implement `load_since` for the cheap-partial sources first (arbin_res / arbin_sql / neware_txt / maccor_txt); others stay full-read |
 | 3 | cellpy `CellpyCell` | `.update()` (change-detect + protocol/fallback), `_load_marker` state + persistence in the cellpy file |
-| 4 | cellpy utils | `live.py` poll loop; delete/retire `processor.py`; fix `batch_core.py:180` `lstrip` |
+| 4 | cellpy utils | `live.py` poll loop; delete/retire `processor.py` (~~`batch_core.py` lstrip~~ — gone) |
 | 5 | cellpy batch | `b.update(live=True)` / `b.poll(...)` |
 | 6 | tests | incremental-refresh smoke tests: load a truncated file, append the tail, assert `update()` == full-load summary (a golden equality test — the strongest correctness net) |
 

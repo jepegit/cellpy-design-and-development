@@ -41,6 +41,7 @@ cellpy-design-and-development/
 | `cellpy-design-and-development/` (this repo) | Plan documents |
 | `../cellpy-examples/` | Example notebooks/scripts |
 | `../cellpy-simple-gui/` | Desktop explorer (FastAPI + pywebview); dogfood app for API pain points & inspiration → cellpy |
+| `../cellpy-mcp/` | MCP server exposing cellpy to agents / chat clients (`cellpy mcp install`); second dogfood consumer (cellpy #840) |
 
 Canonical remote: [`cellpy/cellpy-design-and-development`](https://github.com/cellpy/cellpy-design-and-development).
 Cloud mirror: [`jepegit/cellpy-design-and-development`](https://github.com/jepegit/cellpy-design-and-development).

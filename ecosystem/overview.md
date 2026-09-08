@@ -34,14 +34,16 @@ metadata population, persistence, plotting, batch, CLI.
 | Checkout | Role |
 |---|---|
 | **cellpy-simple-gui** (`cellpy/cellpy-simple-gui`) | Desktop explorer (FastAPI + pywebview) on cellpy ≥ 2.1 — and a **dogfood / discovery** vehicle for the library |
+| **cellpy-mcp** (`cellpy/cellpy-mcp`, since 2026-08; cellpy [#840](https://github.com/jepegit/cellpy/issues/840)) | MCP server: load cells, collect, plot, export, `describe_api`, `new_project` from a chat client / agent — the **second dogfood consumer**, stressing `cli_api`, `list_instruments()`, `read_meta`, `instrument_meta_schema` and figure export as *data* |
 | **cellpy-examples** (`cellpy/cellpy-examples`) | Tutorial notebooks/scripts |
 
-**`cellpy-simple-gui` is not only a product demo.** It exercises real researcher
-workflows (import raw → journal/metadata → collect/plot → project save) so we can
-**surface API pain points, missing conveniences, and UX-driven feature ideas** that
-should feed back into `cellpy` (and sometimes Stage plans). Treat friction found
-there as design input, not just app bugs. Capture candidates in
-[`wishlist.md`](wishlist.md) until they are promoted to issues / Stage work.
+**`cellpy-simple-gui` and `cellpy-mcp` are not only product demos.** They exercise real
+researcher workflows (import raw → journal/metadata → collect/plot → project save) so we
+can **surface API pain points, missing conveniences, and UX-driven feature ideas** that
+should feed back into `cellpy` (and sometimes Stage plans). Most of the `v2.1.2`–`v2.1.4`
+patch stream came from exactly this loop. Treat friction found there as design input, not
+just app bugs. Capture candidates in [`wishlist.md`](wishlist.md) until they are promoted
+to issues / Stage work.
 
 These sit *above* cellpy; they do not own schemas or the compute engine.
 

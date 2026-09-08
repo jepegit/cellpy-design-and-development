@@ -7,6 +7,13 @@ data". Related: [#164](https://github.com/jepegit/cellpy/issues/164) (`c.update(
 [live-incremental design](cellpy2-live-incremental-design.md)); architecture plan
 [§3 / §4 patterns](../roadmap/cellpy2-architecture-plan.md).
 
+> **Note (2026-09-08):** since v2.1.4 ([#989](https://github.com/jepegit/cellpy/issues/989))
+> vendor capacity/energy columns that do not restart at 0 each cycle are **rebased on load**
+> (with a `UserWarning`). Proposed classification for this design: the rebase is part of
+> **ingestion** (tester bookkeeping, like `harmonize()`'s reset-granularity normalization),
+> so "pristine raw" = *post-rebase* raw; it is **not** the first cleaning-recipe step.
+> Registered as Δ8 in the architecture plan §7. Confirm when this design is scheduled.
+
 ## 1. Goal
 
 Let a user clean / interpolate / downsample a cell **without destroying the pristine raw
